@@ -1,0 +1,117 @@
+﻿@model List<Activity2.Models.AirlineTicket>
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>FlightTimes</title>
+    <style>
+        body {
+            margin: 0;
+            background: linear-gradient(45deg, rgb(120,120,180), rgb(180,100,180));
+            font-family: Roboto;
+            font-weight: 100;
+        }
+
+        .container {
+            margin: 0 auto;
+            width: 900px;
+        }
+
+        table {            
+            border-collapse: collapse;
+            overflow: hidden;
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+        }
+
+        th, td {
+            padding: 15px;
+            background-color: rgba(255,255,255,0.2);
+            color: rgb(255,255,255);
+            position: relative;
+        }
+
+        th {
+            text-align: left;
+        }
+
+        tbody tr:hover {
+            background-color: rgba(255,255,255,0.2);
+        }
+        tbody td:hover {
+            background-color: rgba(255,255,255,0.35);
+        }
+
+        td:hover::after,
+        thead th:not(:empty):hover::after,
+        td:focus::after,
+        thead th:not(:empty):focus::after {
+            content: '';
+            height: 10000px;
+            left: 0;
+            position: absolute;
+            top: -5000px;
+            width: 100%;
+            z-index: -1;
+        }
+
+        td:hover::after,
+        th:hover::after {
+            background-color: rgba(255,255,255,0.2);
+        }
+
+        td:focus::after,
+        th:focus::after {
+            background-color: lightblue;
+        }
+
+        caption.Top {
+            caption-side: top;
+            background-color: rgba(255,255,255,0.2);
+            color: rgb(255,255,255);
+        }
+
+    </style>
+</head>
+<body>
+    <div>
+        Flight Times
+    </div>
+    <div class="container"> 
+        <table>
+            <caption class="Top">FlightTimes</caption>
+            <thead>
+                <tr>
+                    <th>Passenger Name</th>
+                    <th>Flight Number</th>
+                    <th>Departure Time</th>
+                    <th>Terminal</th>
+                    <th>Seat</th>
+                    <th>Current City</th>
+                    <th>Destination City</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                @foreach (var flight in Model)
+                {
+                    <tr>
+                        <td>@Html.DisplayFor(flightmodel => flight.PassengerName)</td>
+                        <td>@Html.DisplayFor(flightmodel => flight.FlightNumber)</td>
+                        <td>@Html.DisplayFor(flightmodel => flight.Departure)</td>
+                        <td>@Html.DisplayFor(flightmodel => flight.Terminal)</td>
+                        <td>@Html.DisplayFor(flightmodel => flight.Seat)</td>
+                        <td>@Html.DisplayFor(flightmodel => flight.CurrentCity)</td>
+                        <td>@Html.DisplayFor(flightmodel => flight.Destination)</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

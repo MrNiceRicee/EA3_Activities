@@ -1,0 +1,71 @@
+﻿@model List<Activity2.Models.UserModel>
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Test</title>
+    <style>
+
+        .CustomLabel{
+            font-family: "Roboto";
+            font-size: 26px;
+            display: block;
+        }
+        #smallerH{
+            font-size: 18px;
+        }
+        table {
+            font-family: arial, sans-serif;
+            border-collapse: collapse;
+            width: 100%;
+        }
+        td, th {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+        tr:nth-child(even) {
+            background-color: #dddddd;
+        }
+        tr:hover{
+            background-color: rgb(80,80,80);
+        }
+
+    </style>
+</head>
+<body>
+    <div>
+        <h1>Amazing new Story!</h1>
+        <p>something is about to happen with this page!</p>
+
+        @Html.Label("Welcome to Razor!", new {@class="CustomLabel"})
+        @Html.Label("These are my customers", new { @class = "CustomLabel", @id="smallerH" })
+
+    <table border="1">
+        <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Phone</th>
+        </tr>
+        @foreach(var users in Model)
+        {
+            <tr>
+                <td>@Html.DisplayFor(modelItem => users.Name)</td>
+                <td>@Html.DisplayFor(modelItem => users.EmailAddress)</td>
+                <td>@Html.DisplayFor(modelItem => users.PhoneNumber)</td>
+            </tr>
+        }
+    </table>
+
+        @Html.ActionLink("Refresh this page","../test")
+        @Html.ActionLink("Go to flights", "FlightTimes");
+
+    </div>
+</body>
+</html>

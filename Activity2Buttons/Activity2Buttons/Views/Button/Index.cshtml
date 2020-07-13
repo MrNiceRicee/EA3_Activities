@@ -1,0 +1,83 @@
+﻿@model List<Activity2Buttons.Models.ButtonModel>
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+
+    <script src="~/Scripts/jquery-3.4.1.min.js"></script>
+
+    <style>
+        img.CustomButton{
+            height: 100px;
+            width: 100px;
+        }
+        button.CustomButton {
+            background: rgba(0,0,0,0);
+            border: none;
+            display:inline-block;
+
+        }
+    </style>
+    <script>
+        $(document).ready(function(){
+            $(document).contextmenu(function () {
+                return false;
+            });
+            $('.game-button').mousedown(function (event) {
+
+                if (event.which == 3) {
+                    //console.log("event 3. right click");
+                    //console.log(this.getAttribute("value"));
+
+                    //send the info to the controler
+                    $.post("@Url.Action("HandleOnRightButtonClick", "Button")", {mine: this.getAttribute("value") }, function (data) {
+                        //get some data from the method
+                        //console.log(data);
+                        // refresh the entire page
+                        $("body").html(data);
+                    });
+                }
+            });
+        });
+    </script>
+</head>
+<body>
+    <div>
+        <h1>hello</h1>
+        @Html.ActionLink("Go to Challenge","showChallenge");
+        @using (Html.BeginForm("HandleButtonClick", "Button"))         //action then controller name
+        {
+            for (int i = 0; i < Model.Count; i++)
+            {
+                if (i % 5 == 0)
+                {
+                    <br />
+                }
+                <button type="submit" name="mine" value=@i class="CustomButton game-button">
+                    @if (Model[i].Flagged)
+                    {
+                        <img src="~/Images/Yellow-ActiveButton.png" class="CustomButton" />
+                    }
+                    else if (Model[i].State)
+                    {
+                        <img class="CustomButton" src="~/Images/Blue-InactiveButton.png" />
+                    }
+                    else
+                    {
+                        <img class="CustomButton" src="~/Images/Blue-ActiveButton.png" />
+                    }
+                </button>
+            }
+        }
+
+
+    </div>
+</body>
+</html>

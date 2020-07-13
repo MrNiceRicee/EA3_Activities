@@ -1,0 +1,93 @@
+﻿@model Activity2Buttons.Models.ToggleModel
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Challenge</title>
+    <style>
+        html{
+            height:100%;
+        }
+        body {
+            background: #040D14;
+            background-repeat: no-repeat;
+        }
+        .centerDiv {
+            margin: 0 auto;
+            max-width: 450px;
+            background-color: #558182;
+            text-align: center;
+            border-radius: 20px;
+        }
+        .TitleText {
+            font-family: Roboto;
+            color: #8AD2D4;
+            text-shadow: 2px 2px rgba(0,0,0,0.1);
+        }
+        .TitleText:hover {
+            text-shadow: 2px 2px rgba(0,0,0,0.3);
+        }
+        img.CustomButton {
+            height: 50px;
+            width: 150px;
+        }
+        button.CustomButton{
+            background: rgba(0,0,0,0);
+            border: none;
+        }
+        button:hover .extraContent {
+            display: block;
+        }
+        .extraContent {
+            display: none;
+            color: #8AD2D4;
+            text-shadow: 1px 1px rgba(0,0,0,0.2);
+            position: relative;
+            background: #4F797A;
+            min-width: 100px;
+            border-radius: 100px;
+            padding: 12px 16px;
+            z-index: 1;
+        }
+
+    </style>
+</head>
+<body>
+    <div>
+        @using (Html.BeginForm("HandleToggleClick", "Button"))         //action then controller name
+        {
+        <div class="centerDiv">
+
+            <h1 class="TitleText">Toggle example</h1>
+            <button type="submit" name="status" value=@Model.Status class="CustomButton">
+                @switch (Model.Status)
+                {
+                    case 0:
+                        <img src="~/Images/Toggle-Inactive.png" alt="Alternate Text" class="CustomButton" />
+                        <p class="extraContent">Inactive</p>
+                        break;
+                    case 1:
+                        <img src="~/Images/Toggle-Half.png" alt="Alternate Text" class="CustomButton" />
+                        <p class="extraContent">Mid Trigger</p>
+
+                        break;
+                    case 2:
+                        <img src="~/Images/Toggle-Active.png" alt="Alternate Text" class="CustomButton" />
+                        <p class="extraContent">Active</p>
+
+                        break;
+                    default:
+                        break;
+                }
+            </button>
+        </div>
+        }
+    </div>
+</body>
+</html>
